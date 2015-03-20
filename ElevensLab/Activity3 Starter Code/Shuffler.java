@@ -8,6 +8,8 @@ public class Shuffler {
 	 * to each sorting procedure.
 	 */
 	private static final int SHUFFLE_COUNT = 1;
+	private static final int VALUE_COUNT = 52;
+
 
 
 	/**
@@ -17,7 +19,11 @@ public class Shuffler {
 	public static void main(String[] args) {
 		System.out.println("Results of " + SHUFFLE_COUNT +
 								 " consecutive perfect shuffles:");
-		int[] values1 = {0, 1, 2, 3};
+		int[] values1 = new int[VALUE_COUNT];
+		for(int i =0; i <values1.length; i++)
+		{
+		    values1[i] = i;
+		  }
 		for (int j = 1; j <= SHUFFLE_COUNT; j++) {
 			perfectShuffle(values1);
 			System.out.print("  " + j + ":");
@@ -30,7 +36,11 @@ public class Shuffler {
 
 		System.out.println("Results of " + SHUFFLE_COUNT +
 								 " consecutive efficient selection shuffles:");
-		int[] values2 = {0, 1, 2, 3};
+		int[] values2 = new int[VALUE_COUNT];
+		for(int i =0; i <values2.length; i++)
+		{
+		    values2[i] =i;
+		  }
 		for (int j = 1; j <= SHUFFLE_COUNT; j++) {
 			selectionShuffle(values2);
 			System.out.print("  " + j + ":");
@@ -49,9 +59,33 @@ public class Shuffler {
 	 * the cards in one half with the cards in the other.
 	 * @param values is an array of integers simulating cards to be shuffled.
 	 */
-	public static void perfectShuffle(int[] values) {
+	public static void perfectShuffle(int[] values) 
+	{
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
-	}
+		int upTo = (values.length+1)/2;
+		int[] values1= new int[values.length];
+		int i=0;
+		for(int a: values)
+		{
+		    values1[i] = a;
+		    i++;
+		  }
+		int k =0;
+		for(int n=0; n<upTo; n++)
+		{
+		    values[k] = values1[n];
+		    k+=2;
+		  }
+		k=1;
+		for(int j = upTo+1; j<values.length; j++)
+		{
+		    values[k] = values1[j];
+		    k+=2;
+		  }
+		  }
+		  
+
+	
 
 	/**
 	 * Apply an "efficient selection shuffle" to the argument.
@@ -64,7 +98,25 @@ public class Shuffler {
 	 * searching for an as-yet-unselected card.
 	 * @param values is an array of integers simulating cards to be shuffled.
 	 */
-	public static void selectionShuffle(int[] values) {
+	public static void selectionShuffle(int[] values) 
+	{
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
+		int empty = -1;
+		int[] shuffled = new int[52];
+		for( int i =0; i<52; i++)
+		{
+		    shuffled[i] = values[i];
+		    values[i] = -1;
+		  }
+		for(int k=0; k <52; k++)
+		{
+		    int j = (int) (52 * Math.random());
+		    while (values[j] !=empty)
+		    {
+		        j = (int) (52 * Math.random());
+		        values[j] = shuffled[k];
+		      }
+		  }
+		  }
 	}
-}
+
